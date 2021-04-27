@@ -53,11 +53,11 @@ resource "null_resource" "run_packer" {
     command = <<EOH
 pwd
 ls
-export GOOGLE_APPLICATION_CREDENTIALS=/home/terraform/.config/gcloud/application_default_credentials.json
+export GOOGLE_APPLICATION_CREDENTIALS=/terraform/packer/.config/gcloud/application_default_credentials.json
 export PATH=$${PATH}:/terraform/packer/google-cloud-sdk/bin/
 gcloud info
 ./packer version
-./packer build -var="image_name=${random_pet.name}" .
+./packer build -var 'image_name=${random_pet.name}' .
 EOH
   }
 }
