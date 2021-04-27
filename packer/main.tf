@@ -15,7 +15,9 @@ resource "null_resource" "gcloud_install" {
 wget -O gcloud.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-337.0.0-linux-x86_64.tar.gz?hl=ko
 tar xvf gcloud.tar.gz
 mkdir -p /terraform/packer/.config/gcloud
-echo ${local.credentials} > /terraform/packer/.config/gcloud/application_default_credentials.json
+cat <<EOT >> /terraform/packer/.config/gcloud/application_default_credentials.json
+${local.credentials}
+EOT
 EOH
   }
 }
