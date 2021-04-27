@@ -1,4 +1,13 @@
+locals {
+  timestamp = timestamp()
+}
+
+
 resource "null_resource" "packer" {
+  triggers = {
+    always_run = local.timestamp
+  }
+
   provisioner "local-exec" {
     command = <<EOH
 RELEASE_URL="https://releases.hashicorp.com"
