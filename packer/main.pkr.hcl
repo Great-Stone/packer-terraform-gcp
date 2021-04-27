@@ -7,7 +7,7 @@ source "googlecompute" "basic-example" {
 
 build {
   name = "packer"
-  sources "sources.googlecompute.basic-example" {
+  source "sources.googlecompute.basic-example" {
       name = "packer"
       output_image = "packer"
   }
