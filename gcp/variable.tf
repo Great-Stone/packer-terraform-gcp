@@ -32,8 +32,7 @@ variable "machine_type" {
   default = "g1-small"
 }
 variable "image" {
-  //default = "ubuntu-1804-bionic-v20210415"
-  default = "u16demo"
+  default = "ubuntu-1804-bionic-v20210415"
 }
 variable "placeholder" {
   default     = "placekitten.com"

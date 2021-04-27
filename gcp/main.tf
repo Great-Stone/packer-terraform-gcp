@@ -3,6 +3,17 @@ locals {
   private_key = var.private_key == "" ? file(var.private_key_file) : var.private_key
 }
 
+data "terraform_remote_state" "image_name" {
+  backend = "remote"
+
+  config = {
+    organization = "great-stone-biz"
+    workspaces = {
+      name = "gcp-packer"
+    }
+  }
+}
+
 resource "google_compute_firewall" "default" {
   name    = "k8s-firewall"
   network = "default"
@@ -39,7 +50,8 @@ resource "google_compute_instance" "instance" {
 
   boot_disk {
     initialize_params {
-      image = var.image
+    //   image = var.image
+      image = data.terraform_remote_state.image_name.outputs.image_name
     }
   }
 
