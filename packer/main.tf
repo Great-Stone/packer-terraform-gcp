@@ -20,6 +20,7 @@ ZIP="packer_$${VERSION}_linux_amd64.zip"
 DOWNLOAD_URL="$${RELEASE_URL}/packer/$${VERSION}/$${ZIP}"
 wget -O packer.zip $${DOWNLOAD_URL}
 unzip packer.zip
+packer version
 EOH
   }
 }
