@@ -3,7 +3,7 @@ locals {
 }
 
 
-resource "null_resource" "packer" {
+resource "null_resource" "packer_install" {
   triggers = {
     always_run = local.timestamp
   }
@@ -20,6 +20,18 @@ ZIP="packer_$${VERSION}_linux_amd64.zip"
 DOWNLOAD_URL="$${RELEASE_URL}/packer/$${VERSION}/$${ZIP}"
 wget -O packer.zip $${DOWNLOAD_URL}
 unzip packer.zip
+EOH
+  }
+}
+
+resource "null_resource" "run_packer" {
+  depends_on = [null_resource.packer_install]
+  triggers = {
+    always_run = local.timestamp
+  }
+
+  provisioner "local-exec" {
+    command = <<EOH
 ./packer version
 EOH
   }
