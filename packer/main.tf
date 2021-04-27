@@ -59,7 +59,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=/terraform/packer/.config/gcloud/applicati
 export PATH=$${PATH}:/terraform/packer/google-cloud-sdk/bin/
 gcloud info
 ./packer version
-./packer build -var 'image_name=${random_pet.name.id}' . -force
+./packer build -var 'image_name=${random_pet.name.id}' -force -color=false .
 EOH
   }
 }
