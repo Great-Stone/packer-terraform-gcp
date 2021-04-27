@@ -53,6 +53,7 @@ GOOGLE_APPLICATION_CREDENTIALS=/home/terraform/.config/gcloud/application_defaul
 PATH=$PATH:/home/terraform/google-cloud-sdk/bin/
 gcloud info
 ./packer version
+./packer build main.pkr.hcl
 EOH
   }
 }
