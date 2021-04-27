@@ -32,6 +32,7 @@ resource "null_resource" "run_packer" {
 
   provisioner "local-exec" {
     command = <<EOH
+cat /etc/issue
 ./packer version
 EOH
   }
