@@ -5,7 +5,7 @@ source "googlecompute" "basic-example" {
   zone = var.zone
   disk_size = 10
   disk_type = "pd-ssd"
-  image_name = "u16demo"
+  image_name = var.image_name
 }
 
 build {
