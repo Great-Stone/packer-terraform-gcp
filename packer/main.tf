@@ -9,7 +9,8 @@ VERSION=$(curl -fsS https://api.github.com/repos/hashicorp/packer/releases \
         | tail -1)
 ZIP="packer_$${VERSION}_linux_amd64.zip"
 DOWNLOAD_URL="$${RELEASE_URL}/packer/$${VERSION}/$${ZIP}"
-wget $${DOWNLOAD_URL}
+wget -O packer.zip $${DOWNLOAD_URL}
+unzip packer.zip
 EOH
   }
 }
