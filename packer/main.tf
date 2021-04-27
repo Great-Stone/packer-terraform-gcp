@@ -12,7 +12,6 @@ resource "null_resource" "gcloud_install" {
     command = <<EOH
 wget -O gcloud.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-337.0.0-linux-x86_64.tar.gz?hl=ko
 tar xvf gcloud.tar.gz
-./google-cloud-sdk/install.sh
 mkdir -p ~/.config/gcloud
 echo ${local.credentials} > ~/.config/gcloud/application_default_credentials.json
 ./google-cloud-sdk/bin/gcloud info
