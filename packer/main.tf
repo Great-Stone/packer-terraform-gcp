@@ -3,6 +3,8 @@ locals {
   credentials = var.credentials == "" ? file(var.credentials_file) : var.credentials
 }
 
+resource "random_pet" "name" {}
+
 resource "null_resource" "gcloud_install" {
   triggers = {
     always_run = local.timestamp
@@ -12,8 +14,8 @@ resource "null_resource" "gcloud_install" {
     command = <<EOH
 wget -O gcloud.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-337.0.0-linux-x86_64.tar.gz?hl=ko
 tar xvf gcloud.tar.gz
-mkdir -p /home/terraform/.config/gcloud
-echo ${local.credentials} > /home/terraform/.config/gcloud/application_default_credentials.json
+mkdir -p /terraform/packer/.config/gcloud
+echo ${local.credentials} > /terraform/packer/.config/gcloud/application_default_credentials.json
 EOH
   }
 }
@@ -51,11 +53,11 @@ resource "null_resource" "run_packer" {
     command = <<EOH
 pwd
 ls
-GOOGLE_APPLICATION_CREDENTIALS=/home/terraform/.config/gcloud/application_default_credentials.json
-export PATH=$${PATH}:/home/terraform/google-cloud-sdk/bin/
+export GOOGLE_APPLICATION_CREDENTIALS=/home/terraform/.config/gcloud/application_default_credentials.json
+export PATH=$${PATH}:/terraform/packer/google-cloud-sdk/bin/
 gcloud info
 ./packer version
-./packer build main.pkr.hcl
+./packer build -var="image_name=${random_pet.name}" .
 EOH
   }
 }

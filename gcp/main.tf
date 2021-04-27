@@ -55,47 +55,47 @@ resource "google_compute_instance" "instance" {
 }
 
 # Run the deploy_app.sh script.
-resource "null_resource" "configure-cat-app" {
-  depends_on = [google_compute_instance.instance]
+// resource "null_resource" "configure-cat-app" {
+//   depends_on = [google_compute_instance.instance]
 
-  triggers = {
-    build_number = timestamp()
-  }
+//   triggers = {
+//     build_number = timestamp()
+//   }
 
-  provisioner "file" {
-    source      = "files/"
-    destination = "/home/ubuntu/"
+//   provisioner "file" {
+//     source      = "files/"
+//     destination = "/home/ubuntu/"
 
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = local.private_key
-      host        = google_compute_instance.instance.network_interface.0.access_config.0.nat_ip
-    }
-  }
+//     connection {
+//       type        = "ssh"
+//       user        = "ubuntu"
+//       private_key = local.private_key
+//       host        = google_compute_instance.instance.network_interface.0.access_config.0.nat_ip
+//     }
+//   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt -y update",
-      "sleep 15",
-      "sudo apt -y update",
-      "sudo apt -y install apache2",
-      "sudo systemctl start apache2",
-      "sudo chown -R ubuntu:ubuntu /var/www/html",
-      "chmod +x *.sh",
-      "PLACEHOLDER=${var.placeholder} WIDTH=600 HEIGHT=800 PREFIX=gs ./deploy_app.sh",
-      "sudo apt -y install cowsay",
-      "cowsay Mooooooooooo!",
-    ]
+//   provisioner "remote-exec" {
+//     inline = [
+//       "sudo apt -y update",
+//       "sleep 15",
+//       "sudo apt -y update",
+//       "sudo apt -y install apache2",
+//       "sudo systemctl start apache2",
+//       "sudo chown -R ubuntu:ubuntu /var/www/html",
+//       "chmod +x *.sh",
+//       "PLACEHOLDER=${var.placeholder} WIDTH=600 HEIGHT=800 PREFIX=gs ./deploy_app.sh",
+//       "sudo apt -y install cowsay",
+//       "cowsay Mooooooooooo!",
+//     ]
 
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = local.private_key
-      host        = google_compute_instance.instance.network_interface.0.access_config.0.nat_ip
-    }
-  }
-}
+//     connection {
+//       type        = "ssh"
+//       user        = "ubuntu"
+//       private_key = local.private_key
+//       host        = google_compute_instance.instance.network_interface.0.access_config.0.nat_ip
+//     }
+//   }
+// }
 
 output "instance_ip" {
   value = "http://${google_compute_instance.instance.network_interface.0.access_config.0.nat_ip}"
