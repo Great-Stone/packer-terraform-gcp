@@ -52,7 +52,7 @@ resource "null_resource" "run_packer" {
 pwd
 ls
 GOOGLE_APPLICATION_CREDENTIALS=/home/terraform/.config/gcloud/application_default_credentials.json
-export PATH=${PATH}:/home/terraform/google-cloud-sdk/bin/
+export PATH=$${PATH}:/home/terraform/google-cloud-sdk/bin/
 gcloud info
 ./packer version
 ./packer build main.pkr.hcl
