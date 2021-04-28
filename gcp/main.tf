@@ -55,6 +55,12 @@ resource "google_compute_instance" "instance" {
     }
   }
 
+  labels = {
+    name = "gs.lee"
+    owner = "gs.lee"
+    ttl = "24"
+  }
+
   metadata = {
     ssh-keys = "ubuntu:${local.public_key}"
   }

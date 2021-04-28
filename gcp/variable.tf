@@ -28,6 +28,7 @@ variable "public_key" {
 variable "instance_name" {
   default = "packer-instance"
 }
+#n2-standard-16
 variable "machine_type" {
   default = "g1-small"
 }
