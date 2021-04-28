@@ -1,3 +1,3 @@
 output "image_name" {
-    value = random_pet.name.id
+    value = "${var.image_name}-${local.timestamp}"
 }

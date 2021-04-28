@@ -1,5 +1,5 @@
 locals {
-  timestamp = timestamp()
+  timestamp = formatdate("YYYYMMDD_hhmmss_ZZZ",timestamp())
   credentials = var.credentials == "" ? file(var.credentials_file) : var.credentials
 }
 
@@ -57,7 +57,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=/terraform/packer/.config/gcloud/applicati
 export PATH=$${PATH}:/terraform/packer/google-cloud-sdk/bin/
 gcloud info
 ./packer version
-./packer build -var 'image_name=${var.image_name}-${formatdate("YYYYMMDD_hhmmss_ZZZ",local.timestamp)}' -force -color=false .
+./packer build -var 'image_name=${var.image_name}-${local.timestamp}' -force -color=false .
 EOH
   }
 }
