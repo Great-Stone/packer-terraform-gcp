@@ -3,8 +3,6 @@ locals {
   credentials = var.credentials == "" ? file(var.credentials_file) : var.credentials
 }
 
-resource "random_pet" "name" {}
-
 resource "null_resource" "gcloud_install" {
   triggers = {
     always_run = local.timestamp
@@ -59,7 +57,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=/terraform/packer/.config/gcloud/applicati
 export PATH=$${PATH}:/terraform/packer/google-cloud-sdk/bin/
 gcloud info
 ./packer version
-./packer build -var 'image_name=${random_pet.name.id}' -force -color=false .
+./packer build -var 'image_name=${var.image_name}-${formatdate("YYYYMMDD_hhmmss_ZZZ",local.timestamp)}' -force -color=false .
 EOH
   }
 }

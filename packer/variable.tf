@@ -1,3 +1,6 @@
+variable "image_name" {
+  default = "gs"
+}
 variable "credentials" {
   default = ""
 }
