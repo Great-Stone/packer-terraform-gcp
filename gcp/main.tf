@@ -56,8 +56,8 @@ resource "google_compute_instance" "instance" {
   }
 
   labels = {
-    name = "gs.lee"
-    owner = "gs.lee"
+    name = "gslee"
+    owner = "gslee"
     ttl = "24"
   }
 
