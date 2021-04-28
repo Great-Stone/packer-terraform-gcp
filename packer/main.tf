@@ -1,5 +1,5 @@
 locals {
-  timestamp = formatdate("YYYYMMDD_hhmmss_ZZZ",timestamp())
+  timestamp = formatdate("YYYYMMDD-hhmmss-ZZZ",timestamp())
   credentials = var.credentials == "" ? file(var.credentials_file) : var.credentials
 }
 
