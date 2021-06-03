@@ -58,7 +58,7 @@ resource "google_compute_instance" "instance" {
   labels = {
     name = "gslee"
     owner = "gslee"
-    ttl = "48"
+    ttl = "24"
   }
 
   metadata = {
