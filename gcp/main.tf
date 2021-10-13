@@ -51,7 +51,7 @@ resource "google_compute_instance" "instance" {
   boot_disk {
     initialize_params {
     //   image = var.image
-      image = data.terraform_remote_state.image_name.outputs.image_name
+      image = "gs-20210903-164934"
     }
   }
 
